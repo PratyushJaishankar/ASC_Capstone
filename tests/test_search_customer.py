@@ -17,7 +17,13 @@ def test_search_customer(driver):
     search_page.open_search()
     search_query="bottle"
     search_page.search_product(search_query)
+    current_url = driver.current_url
+    assert "search" in current_url, f"'search' not found in URL after searching: {current_url}"
+    assert "bottle" in current_url, f"'bottle' not found in URL after searching: {current_url}"
     search_page.get_result(search_query)
+    current_url = driver.current_url
+    assert "products" in current_url, f"'search' not found in URL after opening result: {current_url}"
+    assert "bottle" in current_url, f"'bottle' not found in URL after opening result: {current_url}"
     search_page.copy_code()
     search_page.paste_code()
     quantity_query=6
