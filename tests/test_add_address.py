@@ -1,16 +1,16 @@
 import pytest
 from page_objects.add_address import AddressPage
 from page_objects.login_page import LoginPage
-from data.add_address import get_address
-from data.login_data import get_login_data
+from data.Complete_Test_Data.add_address import get_address
+from data.Complete_Test_Data.login_data import get_login_data
 import allure
 import time
 
 browsers = ["chrome"]
 
 @pytest.mark.parametrize("driver", browsers, indirect=True)
-@pytest.mark.parametrize("address_data", get_address("data/add_address.csv"))
-@pytest.mark.parametrize("login_data", get_login_data("data/login_data.csv"))
+@pytest.mark.parametrize("address_data", get_address("data/Complete_Test_Data/add_address.csv"))
+@pytest.mark.parametrize("login_data", get_login_data("data/Complete_Test_Data/login_data.csv"))
 @allure.feature("Add Address")
 def test_add_customer(driver, address_data, login_data):
     driver.get("https://market99.com/")
@@ -30,6 +30,6 @@ def test_add_customer(driver, address_data, login_data):
         address_data["phone_number"]
     )
     # Wait briefly for the page to respond / redirect
-    time.sleep(2)
+    time.sleep(5)
 
     assert add_address_page.isSuccessfullyAdded(address_data["first_name"]) is True

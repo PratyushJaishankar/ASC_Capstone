@@ -41,7 +41,7 @@ class AddressPage(BasePage):
         self.enter_text(self.CITY, city)
         self.enter_text(self.POSTAL_CODE, postal_code)
         self.enter_text(self.PHONE_NUMBER, phone_number)
-        self.select_from_dropdown_by_visible_text(self.PROVINCE, province)
+        self.select_from_dropdown(self.PROVINCE, province)
         self.click(self.DEFAULT_ADDRESS_CHECKBOX)
         time.sleep(2)
         self.click(self.DEFAULT_ADDRESS_CHECKBOX)

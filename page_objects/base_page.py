@@ -1,3 +1,6 @@
+import time
+
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
@@ -6,6 +9,35 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
+
+    def cart_dropdown(self, by_locator, option_locator):
+        dropdown_toggle = self.wait.until(EC.element_to_be_clickable(by_locator))
+        dropdown_toggle.click()
+        # 2️⃣ Select the quantity '6'
+        option = self.wait.until(EC.element_to_be_clickable(option_locator))
+        option.click()
+
+    def paste_text(self, by_locator):
+        elem = self.wait.until(EC.visibility_of_element_located(by_locator))
+        elem.clear()
+        elem.send_keys(Keys.CONTROL, 'v')
+        time.sleep(2)
+        elem.send_keys(Keys.ESCAPE)
+        time.sleep(2)
+
+    def double_click(self, by_locator):
+        elem = self.wait.until(EC.visibility_of_element_located(by_locator))
+        action = ActionChains(self.driver)
+        action.double_click(elem).perform()
+
+    def get_color(self, by_locator, css_property):
+        elem = self.wait.until(EC.visibility_of_element_located(by_locator))
+        return elem.value_of_css_property(css_property)
+
+    def mouse_hover(self, by_locator):
+        elem = self.wait.until(EC.visibility_of_element_located(by_locator))
+        action = ActionChains(self.driver)
+        action.move_to_element(elem).perform()
 
     def click(self, by_locator):
         self.wait.until(EC.element_to_be_clickable(by_locator)).click()
@@ -19,7 +51,7 @@ class BasePage:
         return self.wait.until(EC.presence_of_all_elements_located(by_locator))
 
 
-    def select_from_dropdown_by_visible_text(self, by_locator, text):
+    def select_from_dropdown(self, by_locator, text):
         elem = self.wait.until(EC.visibility_of_element_located(by_locator))
         select = Select(elem)
         select.select_by_visible_text(text)

@@ -1,13 +1,13 @@
 import pytest
 from page_objects.Signup import AddCustomerPage
-from data.add_customer_data import get_add_customer_data
+from data.Complete_Test_Data.add_customer_data import get_add_customer_data
 import allure
 import time
 
 browsers = ["chrome"]
 
 @pytest.mark.parametrize("driver", browsers, indirect=True)
-@pytest.mark.parametrize("customer_data", get_add_customer_data("data/add_customer_data.csv"))
+@pytest.mark.parametrize("customer_data", get_add_customer_data("data/Complete_Test_Data/add_customer_data.csv"))
 @allure.feature("Add Customer")
 def test_add_customer(driver, customer_data):
     driver.get("https://market99.com/")
