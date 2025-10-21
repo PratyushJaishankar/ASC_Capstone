@@ -19,7 +19,7 @@ def test_login_logout(driver):
     assert mouse_hover_result == True
 
     # Load positive test data
-    positive_data = get_data("data/Complete_Test_Data/positive_login_data.csv")
+    positive_data = get_data("data/Complete_Test_Data/login_data.csv")
     # iterate rows and validate login then logout
     for login_data in positive_data:
         print(f"Attempting login for: {login_data.get('email', 'unknown')}")
