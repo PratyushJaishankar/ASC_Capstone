@@ -40,12 +40,12 @@ jobs:
         sudo ln -s /opt/allure-2.24.1/bin/allure /usr/bin/allure
         allure --version
 
-    - name: Run pytest for test_search_product
+    - name: Run pytest for test_home_page_actions
       env:
         BROWSER: chrome
         CI: true
       run: |
-        pytest tests/test_search_product.py -v --alluredir=reports/allure-results
+        pytest tests/test_home_page_actions.py -v --alluredir=reports/allure-results
       continue-on-error: true
 
     - name: Generate Allure Report
