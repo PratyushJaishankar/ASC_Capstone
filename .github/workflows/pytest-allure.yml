@@ -26,6 +26,16 @@ jobs:
           pip install -r requirements.txt
           pip install allure-pytest selenium
 
+      - name: Install Chrome browser
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install ChromeDriver
+        run: |
+          sudo apt-get install -y chromium-chromedriver
+          sudo ln -sf /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
+
       - name: Run Pytest and Generate Allure Results
         run: |
           pytest ./tests --alluredir=allure-results --maxfail=1 --disable-warnings -q
