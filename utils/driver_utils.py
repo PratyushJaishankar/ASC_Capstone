@@ -1,15 +1,40 @@
 import os
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def _local_driver(browser_name):
+    # Check if running in CI environment (GitHub Actions sets CI=true)
+    # On local Windows, this will be False, so browser runs normally
+    is_ci = os.environ.get('CI', 'false').lower() == 'true'
+
     if browser_name == "chrome":
-        return webdriver.Chrome()
+        options = ChromeOptions()
+        # Only apply headless and CI-specific options when running in CI
+        if is_ci:
+            options.add_argument('--headless=new')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+            options.add_argument('--window-size=1920,1080')
+            options.add_argument('--disable-extensions')
+            options.add_argument('--disable-setuid-sandbox')
+        return webdriver.Chrome(options=options)
     elif browser_name == "firefox":
-        return webdriver.Firefox()
+        options = FirefoxOptions()
+        if is_ci:
+            options.add_argument('--headless')
+        return webdriver.Firefox(options=options)
     elif browser_name == "edge":
-        return webdriver.Edge()
+        options = EdgeOptions()
+        if is_ci:
+            options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+        return webdriver.Edge(options=options)
     else:
         raise ValueError(f"Unsupported local browser: {browser_name}")
 
