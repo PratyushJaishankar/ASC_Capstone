@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from page_objects.search_page import SearchPage
 import allure
@@ -11,18 +13,18 @@ browsers = ["chrome"]
 def test_search_customer(driver, search_data):
     driver.get("https://market99.com/")
     search_page = SearchPage(driver)
-
+    time.sleep(2)
     product_name = search_data["product"]
 
     search_page.open_search()
     search_page.search_product(product_name)
-
+    time.sleep(2)
     current_url = driver.current_url
     assert "search" in current_url, f"'search' not found in URL: {current_url}"
     assert product_name in current_url, f"'{product_name}' not found in URL: {current_url}"
 
     search_page.get_result(product_name)
-
+    time.sleep(2)
     current_url = driver.current_url
     assert "products" in current_url, f"'products' not found in URL: {current_url}"
     assert product_name in current_url, f"'{product_name}' not found in URL: {current_url}"
@@ -31,6 +33,9 @@ def test_search_customer(driver, search_data):
     search_page.paste_code()
 
     quantity_query = 6
+    time.sleep(2)
     search_page.add_product_to_cart(str(quantity_query))
+    time.sleep(2)
     cart_quantity = search_page.verify_cart()
+    time.sleep(2)
     assert str(quantity_query) in cart_quantity
