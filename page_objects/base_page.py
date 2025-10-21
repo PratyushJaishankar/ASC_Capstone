@@ -47,6 +47,9 @@ class BasePage:
         elem.clear()
         elem.send_keys(text)
 
+    def find_element(self, by_locator):
+        return self.wait.until(EC.presence_of_element_located(by_locator))
+
     def find_elements(self, by_locator):
         return self.wait.until(EC.presence_of_all_elements_located(by_locator))
 

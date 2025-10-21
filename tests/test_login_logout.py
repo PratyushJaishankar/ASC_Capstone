@@ -1,12 +1,12 @@
 import pytest
 from page_objects.login_page import LoginPage
-from data.Complete_Test_Data.login_data import get_login_data
+from data.Complete_Test_Data.data_loader import get_data
 import allure
 import time
 browsers = ["chrome"]
 
 @pytest.mark.parametrize("driver", browsers, indirect=True)
-@pytest.mark.parametrize("login_data", get_login_data("data/Complete_Test_Data/login_data.csv"))
+@pytest.mark.parametrize("login_data", get_data("data/Complete_Test_Data/login_data.csv"))
 @allure.feature("Login & Logout")
 def test_login_logout(driver, login_data):
     driver.get("https://market99.com/")

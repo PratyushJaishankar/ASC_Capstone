@@ -1,7 +1,6 @@
 import pytest
 import time
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from page_objects.home_page import HomePage
 
 @pytest.fixture(scope="module")

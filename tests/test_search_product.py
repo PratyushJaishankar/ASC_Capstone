@@ -2,13 +2,12 @@ from itertools import product
 
 import pytest
 from page_objects.search_page import SearchPage
-from data.Complete_Test_Data.data_loader import get_data as get_search_data
 import allure
-
+from data.Complete_Test_Data.data_loader import get_data
 browsers = ["chrome"]
 
 @pytest.mark.parametrize("driver", browsers, indirect=True)
-# @pytest.mark.parametrize("search_data", get_search_data("data/Complete_Test_Data/search_data.csv"))
+@pytest.mark.parametrize("search_data", get_data("data/Complete_Test_Data/search_data.csv"))
 @allure.feature("Search Page")
 def test_search_customer(driver):
     driver.get("https://market99.com/")
