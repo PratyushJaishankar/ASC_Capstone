@@ -51,15 +51,3 @@ class SearchPage(BasePage):
     def verify_cart(self):
         quantity = self.get_text(self.VERIFY_CART_QUANTITY)
         return quantity
-
-
-
-
-#     def get_result_name(self):
-#         return self.get_text(self.RESULT_NAME)
-# import csv
-#
-# def get_search_data(csv_path):
-#     with open(csv_path, newline='') as csvfile:
-#         reader = csv.DictReader(csvfile)
-#         return [row for row in reader]

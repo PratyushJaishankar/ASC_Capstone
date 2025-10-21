@@ -31,8 +31,6 @@ class AddressPage(BasePage):
         self.click(self.MY_ACCOUNT_ICON)
         self.click(self.VIEW_ADDRESS)
         self.click(self.ADD_ADDRESS)
-        # self.wait.until(EC.element_to_be_clickable(self.VIEW_ADDRESS)).click()
-        # self.wait.until(EC.element_to_be_clickable(self.ADD_ADDRESS)).click()
         self.enter_text(self.FIRST_NAME_INPUT, first_name)
         self.enter_text(self.LAST_NAME_INPUT, last_name)
         self.enter_text(self.COMPANY_FIELD, company_field)
@@ -57,17 +55,12 @@ class AddressPage(BasePage):
                 text = block.text.strip()
                 print("DEBUG BLOCK TEXT:\n", text)
                 if first_name.lower() in text.lower():
-                    print(f"✅ Found matching address for '{first_name}'")
+                    print(f"Found matching address for '{first_name}'")
                     return True
 
-            print(f"❌ No address block contains '{first_name}'")
+            print(f"No address block contains '{first_name}'")
             return False
 
         except Exception as e:
             print("DEBUG ERROR:", e)
             return False
-
-def get_login_data(csv_path):
-    with open(csv_path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        return [row for row in reader]

@@ -61,13 +61,3 @@ class LoginPage(BasePage):
                 return True
             except Exception:
                 return False
-
-    # Helper: return True when login form (email input) is visible — used for negative tests / logged-out state
-    def is_login_page_loaded(self, timeout=1):
-        try:
-            self.find_elements(self.EMAIL_INPUT)
-            return True
-        except Exception:
-            return False
-
-# Note: data loading is centralized in `data/Complete_Test_Data/login_data.py` which calls the shared data loader.

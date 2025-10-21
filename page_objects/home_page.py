@@ -47,20 +47,9 @@ class HomePage(BasePage):
         self.driver.execute_script(f"document.body.style.zoom='{new_zoom}'")
         print(f"Zoomed out: {new_zoom}")
 
-    # Keyboard zoom methods are unreliable in Selenium and are commented out
-    # def zoom_in_keyboard(self):
-    #     pass
-    # def zoom_out_keyboard(self):
-    #     pass
-
     def mouse_scroll(self, pixels):
         """Scroll using mouse wheel simulation (ActionChains)."""
         from selenium.webdriver.common.action_chains import ActionChains
         actions = ActionChains(self.driver)
         actions.scroll_by_amount(0, pixels).perform()
 
-    # def mouse_zoom(self, zoom_in=True):
-    #     """Simulate mouse wheel zoom (if supported by browser)."""
-    #     # Note: Most browsers do not support zoom via mouse wheel in Selenium directly
-    #     # This is a placeholder for custom implementation if needed
-    #     pass
