@@ -1,3 +1,0 @@
-
-Starting test with login: aarav.shasddasarma123@example.com
-Address data: {'first_name': 'Pratyush', 'last_name': 'Jaishankar', 'company_field': 'Ascendion Technologies', 'province': 'Karnataka', 'address_line_1': '123 MG Road', 'address_line_2': 'Near Central Mall', 'city': 'Bangalore', 'postal_code': '560001', 'phone_number': '9876543210'}
