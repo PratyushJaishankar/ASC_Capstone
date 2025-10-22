@@ -2,11 +2,14 @@ import pytest
 import time
 from page_objects.home_page import HomePage
 
+browsers = ["chrome", "edge"]
+
 @pytest.fixture
 def home_page(driver):
     driver.get("https://market99.com/")
     return HomePage(driver)
 
+@pytest.mark.parametrize("driver", browsers, indirect=True)
 def test_page_up(driver, home_page):
     print("[Test] Starting test_page_up...")
     print("Scrolling down using page_down...")
@@ -17,6 +20,7 @@ def test_page_up(driver, home_page):
     time.sleep(2)
     print("[Test] Finished test_page_up.")
 
+@pytest.mark.parametrize("driver", browsers, indirect=True)
 def test_page_down(driver, home_page):
     print("[Test] Starting test_page_down...")
     print("Scrolling down using page_down...")
@@ -24,6 +28,7 @@ def test_page_down(driver, home_page):
     time.sleep(2)
     print("[Test] Finished test_page_down.")
 
+@pytest.mark.parametrize("driver", browsers, indirect=True)
 def test_scroll_by_pixel(driver, home_page):
     print("[Test] Starting test_scroll_by_pixel...")
     print("Scrolling by 300 pixels...")
@@ -31,6 +36,7 @@ def test_scroll_by_pixel(driver, home_page):
     time.sleep(2)
     print("[Test] Finished test_scroll_by_pixel.")
 
+@pytest.mark.parametrize("driver", browsers, indirect=True)
 def test_scroll_to_top(driver, home_page):
     print("[Test] Starting test_scroll_to_top...")
     print("Scrolling to top of page...")
@@ -38,6 +44,7 @@ def test_scroll_to_top(driver, home_page):
     time.sleep(2)
     print("[Test] Finished test_scroll_to_top.")
 
+@pytest.mark.parametrize("driver", browsers, indirect=True)
 def test_scroll_to_bottom(driver, home_page):
     print("[Test] Starting test_scroll_to_bottom...")
     print("Scrolling to bottom of page...")
@@ -45,6 +52,7 @@ def test_scroll_to_bottom(driver, home_page):
     time.sleep(2)
     print("[Test] Finished test_scroll_to_bottom.")
 
+@pytest.mark.parametrize("driver", browsers, indirect=True)
 def test_zoom_in_js(driver, home_page):
     print("[Test] Starting test_zoom_in_js...")
     print("Zooming in using JavaScript...")
@@ -52,6 +60,7 @@ def test_zoom_in_js(driver, home_page):
     time.sleep(2)
     print("[Test] Finished test_zoom_in_js.")
 
+@pytest.mark.parametrize("driver", browsers, indirect=True)
 def test_zoom_out_js(driver, home_page):
     print("[Test] Starting test_zoom_out_js...")
     print("Zooming out using JavaScript...")
@@ -59,6 +68,7 @@ def test_zoom_out_js(driver, home_page):
     time.sleep(2)
     print("[Test] Finished test_zoom_out_js.")
 
+@pytest.mark.parametrize("driver", browsers, indirect=True)
 def test_mouse_scroll(driver, home_page):
     print("[Test] Starting test_mouse_scroll...")
     print("Scrolling using mouse simulation by 200 pixels...")

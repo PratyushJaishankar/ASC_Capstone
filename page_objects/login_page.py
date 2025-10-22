@@ -61,3 +61,13 @@ class LoginPage(BasePage):
                 return True
             except Exception:
                 return False
+
+    def is_login_page_loaded(self, timeout=3):
+        """Check if the login page/form is still displayed (used for negative test validation)"""
+        try:
+            # Check if URL contains /account/login (indicating failed login kept user on login page)
+            if '/account/login' in self.driver.current_url:
+                return True
+            # Also check if the email input field is still visible as a fallback
+        except Exception:
+            return False

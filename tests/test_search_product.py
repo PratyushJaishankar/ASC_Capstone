@@ -5,7 +5,7 @@ from page_objects.search_page import SearchPage
 import allure
 from data.Complete_Test_Data.data_loader import get_data
 
-browsers = ["chrome"]
+browsers = ["chrome", "edge"]
 
 @pytest.mark.parametrize("driver", browsers, indirect=True)
 @pytest.mark.parametrize("search_data", get_data("data/Complete_Test_Data/search_data.xlsx"))
