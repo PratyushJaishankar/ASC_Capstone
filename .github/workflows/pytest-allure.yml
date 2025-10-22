@@ -45,7 +45,7 @@ jobs:
         BROWSER: chrome
         CI: true
       run: |
-        pytest tests/test_home_page_actions.py -v --alluredir=reports/allure-results
+        pytest -v --alluredir=reports/allure-results
       continue-on-error: true
 
     - name: Generate Allure Report
