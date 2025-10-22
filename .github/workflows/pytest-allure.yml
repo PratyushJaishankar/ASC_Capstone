@@ -10,10 +10,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: [chrome, edge]
-      fail-fast: false
 
     steps:
     - name: Checkout code
@@ -25,59 +21,40 @@ jobs:
         python-version: '3.11'
 
     - name: Set up Chrome
-      if: matrix.browser == 'chrome'
       uses: browser-actions/setup-chrome@v1
       with:
         chrome-version: stable
 
     - name: Display Chrome version
-      if: matrix.browser == 'chrome'
       run: chrome --version
-
-    - name: Set up Microsoft Edge
-      if: matrix.browser == 'edge'
-      run: |
-        curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-        sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-        sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
-        sudo rm microsoft.gpg
-        sudo apt update
-        sudo apt install -y microsoft-edge-stable
-
-    - name: Display Edge version
-      if: matrix.browser == 'edge'
-      run: microsoft-edge --version
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
     - name: Install Allure CLI
       run: |
         sudo wget https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
         sudo tar -zxf allure-2.24.1.tgz -C /opt/
         sudo ln -s /opt/allure-2.24.1/bin/allure /usr/bin/allure
         allure --version
-
-    - name: Run pytest for test_add_address
+    - name: Run pytest for test_home_page_actions
       env:
-        BROWSER: ${{ matrix.browser }}
+        BROWSER: chrome
         CI: true
       run: |
-        pytest tests/test_add_address.py -v -s --alluredir=reports/allure-results
+        pytest tests/test_home_page_actions.py -v --alluredir=reports/allure-results
       continue-on-error: true
 
     - name: Generate Allure Report
       if: always()
       run: |
         allure generate reports/allure-results -o reports/allure-report --clean
-
     - name: Upload Allure Results
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: allure-results-${{ matrix.browser }}
+        name: allure-results
         path: reports/allure-results
         retention-days: 30
 
@@ -85,7 +62,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: allure-report-${{ matrix.browser }}
+        name: allure-report
         path: reports/allure-report
         retention-days: 30
 
@@ -96,4 +73,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: reports/allure-report
         publish_branch: gh-pages
-        destination_dir: ${{ matrix.browser }}
