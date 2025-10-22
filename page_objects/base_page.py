@@ -91,6 +91,12 @@ class BasePage:
     def is_visible(self, by_locator):
         return self.wait.until(EC.visibility_of_element_located(by_locator))
 
+    def scroll_to_element(self, by_locator):
+        """Scroll to make an element visible in the viewport"""
+        element = self.wait.until(EC.presence_of_element_located(by_locator))
+        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", element)
+        time.sleep(0.5)  # Brief pause after scrolling
+
     # Added helper to execute JavaScript on the page
     def execute_script(self, script, *args):
         return self.driver.execute_script(script, *args)

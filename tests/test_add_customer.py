@@ -4,7 +4,7 @@ from data.Complete_Test_Data.data_loader import get_data
 import allure
 import time
 
-browsers = ["chrome"]
+browsers = ["chrome", "edge"]
 
 @pytest.mark.parametrize("driver", browsers, indirect=True)
 @pytest.mark.parametrize("customer_data", get_data("data/Complete_Test_Data/add_customer_data.csv"))
