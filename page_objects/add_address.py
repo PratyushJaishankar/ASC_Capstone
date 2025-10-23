@@ -8,7 +8,6 @@ Functions created in this module:
 - isSuccessfullyAdded(first_name)
 """
 
-import csv
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
@@ -59,10 +58,25 @@ class AddressPage(BasePage):
 
     def isSuccessfullyAdded(self, first_name):
         try:
+            # Scroll to the bottom of the page to ensure all addresses are loaded
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(1)
+
+            # Scroll back to top to start from the beginning
+            self.driver.execute_script("window.scrollTo(0, 0);")
+            time.sleep(1)
+
+            # Wait for address blocks to be present
+            self.wait.until(lambda driver: len(driver.find_elements(By.CSS_SELECTOR, "div.address p")) > 0)
+
             # Collect all <p> inside address divs
             address_blocks = self.driver.find_elements(By.CSS_SELECTOR, "div.address p")
 
             for block in address_blocks:
+                # Scroll each block into view before reading text
+                self.driver.execute_script("arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", block)
+                time.sleep(0.3)
+
                 text = block.text.strip()
                 if first_name.lower() in text.lower():
                     print(f"Found matching address for '{first_name}'")
@@ -72,4 +86,5 @@ class AddressPage(BasePage):
             return False
 
         except Exception as e:
+            print(f"Exception in isSuccessfullyAdded: {str(e)}")
             return False
