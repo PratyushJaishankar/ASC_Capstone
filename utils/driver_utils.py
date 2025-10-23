@@ -49,6 +49,16 @@ def _local_driver(browser_name):
         options.add_argument('--safebrowsing-disable-auto-update')
         options.add_argument('--disable-blink-features=AutomationControlled')
 
+        # Fix for DevToolsActivePort error in Windows service context
+        options.add_argument('--remote-debugging-port=9222')
+        options.add_argument('--disable-features=msSmartScreenProtection')
+
+        # Create a temp user data directory to avoid profile access issues
+        import tempfile
+        temp_dir = tempfile.mkdtemp(prefix='edge_profile_')
+        options.add_argument(f'--user-data-dir={temp_dir}')
+        options.add_argument('--profile-directory=Default')
+
         if is_ci:
             options.add_argument('--headless=new')
             options.add_argument('--window-size=1920,1080')
