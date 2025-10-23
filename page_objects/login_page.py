@@ -1,3 +1,17 @@
+"""
+Author_Name: Pratyush Jaishankar
+Project_Name: ASC_Capstone
+
+Functions created in this module:
+- __init__(driver)
+- mouse_hover_perform()
+- open_login()
+- login(email, password)
+- logout()
+- is_logged_in(timeout=3)
+- is_login_page_loaded(timeout=3)
+"""
+
 import time
 
 from selenium.webdriver.support.ui import WebDriverWait

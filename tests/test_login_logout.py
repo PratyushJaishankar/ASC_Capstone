@@ -1,7 +1,6 @@
 import pytest
 from page_objects.login_page import LoginPage
 from data.Complete_Test_Data.data_loader import get_data
-import allure
 import time
 
 browsers = ["chrome", "edge"]

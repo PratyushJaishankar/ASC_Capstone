@@ -1,3 +1,13 @@
+"""
+Author_Name: Pratyush Jaishankar
+Project_Name: ASC_Capstone
+
+Functions created in this module:
+- __init__(driver)
+- new_address(first_name, last_name, company_field, province, address_line_1, address_line_2, city, postal_code, phone_number)
+- isSuccessfullyAdded(first_name)
+"""
+
 import csv
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By

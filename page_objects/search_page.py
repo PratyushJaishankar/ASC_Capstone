@@ -1,4 +1,16 @@
-from idlelib import query
+"""
+Author_Name: Pratyush Jaishankar
+Project_Name: ASC_Capstone
+
+Functions created in this module:
+- open_search()
+- search_product(query)
+- get_result(query)
+- add_product_to_cart(quantity)
+- copy_code()
+- paste_code()
+- verify_cart()
+"""
 
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By

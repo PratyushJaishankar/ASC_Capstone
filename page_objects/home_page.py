@@ -1,7 +1,19 @@
-import time
+"""
+Author_Name: Pratyush Jaishankar
+Project_Name: ASC_Capstone
+
+Functions created in this module:
+- page_up()
+- page_down()
+- scroll_by_pixel(pixels)
+- scroll_to_top()
+- scroll_to_bottom()
+- zoom_in_js(step=0.8)
+- zoom_out_js(step=0.8)
+- mouse_scroll(pixels)
+"""
+
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from .base_page import BasePage
 
 class HomePage(BasePage):
@@ -52,4 +64,3 @@ class HomePage(BasePage):
         from selenium.webdriver.common.action_chains import ActionChains
         actions = ActionChains(self.driver)
         actions.scroll_by_amount(0, pixels).perform()
-

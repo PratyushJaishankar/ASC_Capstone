@@ -4,4 +4,4 @@ pytest-xdist
 allure-pytest
 pandas
 openpyxl
-
+requests
