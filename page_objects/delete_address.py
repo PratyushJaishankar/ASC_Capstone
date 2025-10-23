@@ -1,4 +1,13 @@
-import csv
+"""
+Author_Name: Pratyush Jaishankar
+Project_Name: ASC_Capstone
+
+Functions created in this module:
+- __init__(driver)
+- delete_address_by_name(first_name, last_name)
+- is_address_deleted(first_name, last_name)
+"""
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from .base_page import BasePage

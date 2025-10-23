@@ -1,3 +1,14 @@
+"""
+Author_Name: Pratyush Jaishankar
+Project_Name: ASC_Capstone
+
+Functions created in this module:
+- open_registration()
+- add_customer(first_name, last_name, email, password)
+- is_registration_successful(homepage_url="https://market99.com")
+- is_registration_page_loaded(timeout=2)
+"""
+
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait

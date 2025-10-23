@@ -1,3 +1,26 @@
+"""
+Author_Name: Pratyush Jaishankar
+Project_Name: ASC_Capstone
+
+Functions created in this module:
+- cart_dropdown(by_locator, option_locator)
+- paste_text(by_locator)
+- double_click(by_locator)
+- get_color(by_locator, css_property)
+- mouse_hover(by_locator)
+- click(by_locator)
+- enter_text(by_locator, text)
+- find_element(by_locator)
+- find_elements(by_locator)
+- select_from_dropdown(by_locator, text)
+- get_text(by_locator)
+- is_visible(by_locator)
+- scroll_to_element(by_locator)
+- execute_script(script, *args)
+- send_keys(keys, by_locator=None)
+- wait_for_page_load(timeout=30)
+"""
+
 import time
 import os
 
