@@ -1,5 +1,6 @@
 import pytest
 from page_objects.Signup import AddCustomerPage
+from utils.browser_config import get_browsers
 import allure
 import time
 from datetime import datetime
@@ -13,7 +14,7 @@ customer_rows = [
     {"first_name": "Prat", "last_name": "Jai", "email_prefix": "Prat.Jai.valid", "password": "Pass@1234", "result": "success"},
 ]
 
-browsers = ["chrome", "edge"]
+browsers = get_browsers()
 
 def generate_unique_email(prefix):
     """Generate a unique email using timestamp"""

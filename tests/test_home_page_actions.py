@@ -1,8 +1,9 @@
 import pytest
 import time
 from page_objects.home_page import HomePage
+from utils.browser_config import get_browsers
 
-browsers = ["chrome", "edge"]
+browsers = get_browsers()
 
 @pytest.fixture
 def home_page(driver):
