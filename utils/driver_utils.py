@@ -31,16 +31,31 @@ def _local_driver(browser_name):
         return webdriver.Firefox(options=options)
     elif browser_name == "edge":
         options = EdgeOptions()
+
+        # Critical flags for Jenkins/Windows service context
+        # These prevent Edge from crashing when run as a service
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--disable-extensions')
+        options.add_argument('--disable-software-rasterizer')
+        options.add_argument('--disable-background-networking')
+        options.add_argument('--disable-default-apps')
+        options.add_argument('--disable-sync')
+        options.add_argument('--disable-translate')
+        options.add_argument('--metrics-recording-only')
+        options.add_argument('--mute-audio')
+        options.add_argument('--no-first-run')
+        options.add_argument('--safebrowsing-disable-auto-update')
+        options.add_argument('--disable-blink-features=AutomationControlled')
+
         if is_ci:
             options.add_argument('--headless=new')
-            options.add_argument('--no-sandbox')
-            options.add_argument('--disable-dev-shm-usage')
-            options.add_argument('--disable-gpu')
             options.add_argument('--window-size=1920,1080')
-            options.add_argument('--disable-extensions')
         else:
             # For local runs, maximize window for better visibility
             options.add_argument('--start-maximized')
+
         # Check if EDGE_DRIVER_PATH is set in the environment
         edge_driver_path = os.environ.get("EDGE_DRIVER_PATH")
         if edge_driver_path:
