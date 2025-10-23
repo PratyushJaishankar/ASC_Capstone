@@ -61,11 +61,9 @@ class AddressPage(BasePage):
         try:
             # Collect all <p> inside address divs
             address_blocks = self.driver.find_elements(By.CSS_SELECTOR, "div.address p")
-            print(f"DEBUG: Found {len(address_blocks)} address blocks")
 
             for block in address_blocks:
                 text = block.text.strip()
-                print("DEBUG BLOCK TEXT:\n", text)
                 if first_name.lower() in text.lower():
                     print(f"Found matching address for '{first_name}'")
                     return True
@@ -74,5 +72,4 @@ class AddressPage(BasePage):
             return False
 
         except Exception as e:
-            print("DEBUG ERROR:", e)
             return False

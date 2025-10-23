@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver.edge.service import Service as EdgeService
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
@@ -31,10 +32,24 @@ def _local_driver(browser_name):
     elif browser_name == "edge":
         options = EdgeOptions()
         if is_ci:
-            options.add_argument('--headless')
+            options.add_argument('--headless=new')
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
-        return webdriver.Edge(options=options)
+            options.add_argument('--disable-gpu')
+            options.add_argument('--window-size=1920,1080')
+            options.add_argument('--disable-extensions')
+        else:
+            # For local runs, maximize window for better visibility
+            options.add_argument('--start-maximized')
+        # Check if EDGE_DRIVER_PATH is set in the environment
+        edge_driver_path = os.environ.get("EDGE_DRIVER_PATH")
+        if edge_driver_path:
+            # Use the specified driver path
+            service = EdgeService(executable_path=edge_driver_path)
+            return webdriver.Edge(service=service, options=options)
+        else:
+            # Let Selenium Manager handle the driver
+            return webdriver.Edge(options=options)
     else:
         raise ValueError(f"Unsupported local browser: {browser_name}")
 
